@@ -1,0 +1,28 @@
+body {
+    background-color: darkseagreen;
+    font-size: 20px;
+}
+
+
+p {
+    background-color: darkgray;
+    color: brown;
+    border:100px dashed;
+
+    /*margin creates external space around our element*/
+    margin: 50px;
+
+    /*padding is internal spacing that extends background and */
+    padding: 50px;
+}
+
+h1 {
+    color: red;
+}
+
+/* in cc, classes are denoted by a . in front of their class name */
+.banner{
+    background-color: yellow;
+    font-size: 40px;
+    text-align: center;
+}
