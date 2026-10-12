@@ -1,27 +1,54 @@
+:root {
+    --green: #164014;
+    --yellow: #FFC500;
+    --orange: #f57f20;
+    --cream: #FFEAD9;
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    background-color: black;
-}
+    background-color: var(--green);
 
-/* Main container */
-.illusion {
-    width: 100%;
-    height: 100vh;
-
-    /* Keeps container item in position */
+/* this centers the container illusion on page */
     display: flex;
     justify-content: center;
     align-items: center;
 
+    min-height: 100vh;
+
+    overflow-x: clip;
+
+    /* for background color change in .illusion:hover */
+    transition: background-color 5s ease-in-out;
+}
+
+
+
+/* Main container */
+.illusion {
+    width: 500px;
+    max-width: 90%;
+    /* logo ratio */
+    aspect-ratio: 714 / 550;
+
+    /* Keeps container item in position */
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    /* center container */
+
+    margin: auto;
+
     /* Keeps items in container together/overlap with absolute */
     position: relative;
 
-    /* Hides what exceeds the container (animation lines) */
-    overflow: hidden;
+    /* Hides what exceeds the container (animation lines).
+    changed it to show since I changed illusion container size */
+    overflow: visible;
 
     transition: background-color 2s ease-in-out;
     animation: backgroundchange 12s ease-in-out infinite;
@@ -34,21 +61,21 @@ body {
     /* Makes the logos overlap */
     position: absolute;
 
-    width: 500px;
-    max-width: 90%;
+    width: 100%;
+    height: 100%;
 
     /* Logo ratio */
-    aspect-ratio: 714 / 550;
+    /* aspect-ratio: 714 / 550; */
 
     /* Vertical white lines */
     background: repeating-linear-gradient(
         90deg,
-        white 0px 1px,
+        var(--orange) 0px 1px,
         transparent 1px 10px
     );
 
     /* Logo mask */
-    mask-image: url("frzy-logo.png");
+    mask-image: url("frzy-logo-green.png");
 
     mask-size: 100% 100%;
 
@@ -69,14 +96,22 @@ body {
 .illusion:has(.logocenter:hover) .logoleft,
 .illusion:has(.logocenter:hover) .logoright {
     opacity: 0;
+
 }
 
 .logocenter:hover {
     background: repeating-linear-gradient(
         90deg,
-        red 0px 1px,
+        var(--green) 0px 1px,
         transparent 1px 10px
     );
+}
+
+/* This trasitions the left and right logo when they go in and out with the hover over center */
+.logoleft,
+.logoright {
+    opacity: 1;
+    transition: opacity 3s ease-in-out;
 }
 
 /* .logoleft:hover {
@@ -115,7 +150,7 @@ body {
     }
 
     to {
-        background-position-x: 50px;
+        background-position-x: 10px;
     }
 }
 
@@ -127,7 +162,7 @@ body {
     }
 
     50% {
-        transform: translateX(-200px);
+        transform: translateX(-250px);
     }
 
     100% {
@@ -143,7 +178,7 @@ body {
     }
 
     50% {
-        transform: translateX(200px);
+        transform: translateX(250px);
     }
 
     100% {
@@ -153,6 +188,9 @@ body {
 
 
 
-.illusion:hover {
-    background-color: white;
+
+
+body:has(.illusion:hover) {
+    background-color: var(--cream);
+    transition: 3s;
 }
