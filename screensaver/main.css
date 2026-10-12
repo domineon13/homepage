@@ -1,0 +1,158 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+}
+
+/* Main container */
+.illusion {
+    width: 100%;
+    height: 100vh;
+
+    /* Keeps container item in position */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Keeps items in container together/overlap with absolute */
+    position: relative;
+
+    /* Hides what exceeds the container (animation lines) */
+    overflow: hidden;
+
+    transition: background-color 2s ease-in-out;
+    animation: backgroundchange 12s ease-in-out infinite;
+}
+
+/* 3 logos */
+.logocenter,
+.logoleft,
+.logoright {
+    /* Makes the logos overlap */
+    position: absolute;
+
+    width: 500px;
+    max-width: 90%;
+
+    /* Logo ratio */
+    aspect-ratio: 714 / 550;
+
+    /* Vertical white lines */
+    background: repeating-linear-gradient(
+        90deg,
+        white 0px 1px,
+        transparent 1px 10px
+    );
+
+    /* Logo mask */
+    mask-image: url("frzy-logo.png");
+
+    mask-size: 100% 100%;
+
+    mask-position: center;
+
+    mask-repeat: no-repeat;
+}
+
+/* Center logo */
+.logocenter {
+    animation: movelines 2s ease-in infinite;
+    animation-delay: 2s;
+
+    /* z-index act like layers, higher number = uppermost later */
+    z-index: 2;
+}
+
+.illusion:has(.logocenter:hover) .logoleft,
+.illusion:has(.logocenter:hover) .logoright {
+    opacity: 0;
+}
+
+.logocenter:hover {
+    background: repeating-linear-gradient(
+        90deg,
+        red 0px 1px,
+        transparent 1px 10px
+    );
+}
+
+/* .logoleft:hover {
+    opacity: 0;
+}
+
+.logoright:hover {
+    opacity: 0;
+} */
+
+/* Left logo */
+.logoleft {
+    animation:
+        movelines 1s linear infinite,
+        moveleft 24s linear infinite;
+
+        /* seprate times for both animation above */
+        animation-delay: 4s, 5s;
+}
+
+/* Right logo */
+.logoright {
+    animation:
+        movelines 1s linear infinite,
+        moveright 24s linear infinite;
+
+        /* seprate times for both animation above */
+        animation-delay: 4s, 5s;
+}
+
+
+/* Animation for vertical lines */
+@keyframes movelines {
+    from {
+        background-position-x: 0px;
+    }
+
+    to {
+        background-position-x: 50px;
+    }
+}
+
+
+/* Animation for left logo */
+@keyframes moveleft {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-200px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* Animation for right logo */
+@keyframes moveright {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(200px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+
+.illusion:hover {
+    background-color: white;
+}
